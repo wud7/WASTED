@@ -343,6 +343,4 @@ def final_mountain():
 
     path("Inspect Doors", "Middle Door", inspect_doors, middle_door)
 
-print("PLEASE IDEALLY PLAY IN LOCAL IDE INSTEAD OF REPLIT FOR THE BEST EXPERIENCE")
-time.sleep(3)
 beginning()
