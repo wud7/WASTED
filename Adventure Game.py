@@ -15,11 +15,6 @@ def scrolling_text(text, delay=0.03):
     else:
         return False
 
-def splash(text, delay=0.03):
-    for char in text:
-        print(char, end='', flush=True)
-        time.sleep(delay)
-
 def path(p1, p2, p1_func, p2_func):
     scrolling_text(f"Do you choose: {p1}/{p2})")
     chosen_path = input("Choice: ").strip().lower()
@@ -35,7 +30,7 @@ def path(p1, p2, p1_func, p2_func):
 
 def gameover(cause):
     print(f"Oh no, you have fallen due to {cause}...")
-    splash("""
+    print(r"""
 
       _____          _____        ______  _______        ______                 _____     ____      ____      ______        _____   
   ___|\    \     ___|\    \      |      \/       \   ___|\     \           ____|\    \   |    |    |    | ___|\     \   ___|\    \  
@@ -50,12 +45,13 @@ def gameover(cause):
    \( |____|/    \(      )/      \(          )/       \( |_____|/            \(    )/        \(    )/      \( |_____|/   \(     )/  
     '   )/        '      '        '          '         '    )/                '    '          '    '        '    )/       '     '   
         '                                                   '                                                    '                  
-""", 0.0001)
+""")
     time.sleep(3)
     os.system("shutdown /p")
+    exit()
 
 def beginning():
-    splash("""
+    print(r"""
 
   _____                 _____            ______   _________________      ______        _____   
  |\    \   _____    ___|\    \       ___|\     \ /                 \ ___|\     \   ___|\    \  
@@ -70,7 +66,7 @@ def beginning():
     \(   \|____|/   \(      )/      \(    )/          \(              \( |_____|/   \(    )/   
      '      )/       '      '        '    '            '               '    )/       '    '    
             '                                                               '                  
-""", 0.0001)
+""",)
     time.sleep(3)
     scrolling_text("You wake up alone sitting on top of a pile of trash... (Press Enter to continue)")
     scrolling_text("Confused, you start thinking about how you got here...")
@@ -82,6 +78,22 @@ def beginning():
     path("Village", "Forest", village_scene, forest)
 
 def village_scene():
+    print(r"""                                                                           
+    
+ ____      ____  ____  ____         ____               ____         _____         ______   
+|    |    |    ||    ||    |       |    |         ____|\   \    ___|\    \    ___|\     \  
+|    |    |    ||    ||    |       |    |        /    /\    \  /    /\    \  |     \     \ 
+|    |    |    ||    ||    |       |    |       |    |  |    ||    |  |____| |     ,_____/|
+|    |    |    ||    ||    |  ____ |    |  ____ |    |__|    ||    |    ____ |     \--'\_|/
+|    |    |    ||    ||    | |    ||    | |    ||    .--.    ||    |   |    ||     /___/|  
+|\    \  /    /||    ||    | |    ||    | |    ||    |  |    ||    |   |_,  ||     \____|\ 
+| \ ___\/___ / ||____||____|/____/||____|/____/||____|  |____||\ ___\___/  /||____ '     /|
+ \ |   ||   | / |    ||    |     |||    |     |||    |  |    || |   /____ / ||    /_____/ |
+  \|___||___|/  |____||____|_____|/|____|_____|/|____|  |____| \|___|    | / |____|     | /
+    \(    )/      \(    \(    )/     \(    )/     \(      )/     \( |____|/    \( |_____|/ 
+     '    '        '     '    '       '    '       '      '       '   )/        '    )/    
+                                                                      '              '     
+    """)
     scrolling_text("You arrive at the village...")
     scrolling_text("You see a sign that says 'Welcome to the Village of the Lost'...")
     scrolling_text("As you walk through the village, you notice that there were no people...")
@@ -92,6 +104,9 @@ def village_scene():
         pass
     path("Fight", "Run", fight, forest)
     scrolling_text("After a few minutes, you became friends with the villager...")
+    scrolling_text("Villager: 'You are a good fighter, what shall I call you by?'...")
+    name = input("You: Oh, my name is ")
+    scrolling_text(f"Villager: 'Well {name}, it is nice to know you'...")
     scrolling_text("You:'So, what is this place?'")
     scrolling_text("Villager:'This is the Village of the Lost, one of the only surviving places here after the plastic incident'...")
     scrolling_text("You:'Plastic incident?'")
@@ -122,7 +137,7 @@ def village():
 
 def gambling():
     scrolling_text("You walk inside, and you see several gambling machines...")
-    scrolling_text("There are so many to choose from, which one do you wanna play?")
+    scrolling_text(f"There are so many to choose from, which one do you wanna play?")
     path("Slot Machine", "Blackjack", slot_machine, blackjack)
 
 def slot_machine():
@@ -176,6 +191,22 @@ def blackjack():
     path("Play Again", "Leave", blackjack, village)
 
 def forest():
+    print(r"""
+                                                                                            
+      _____         _____         _____        ______            ______   _________________ 
+ ____|\    \   ____|\    \    ___|\    \   ___|\     \       ___|\     \ /                 \
+|    | \    \ /     /\    \  |    |\    \ |     \     \     |    |\     \\______     ______/
+|    |______//     /  \    \ |    | |    ||     ,_____/|    |    |/____/|   \( /    /  )/   
+|    |----'\|     |    |    ||    |/____/ |     \--'\_|/ ___|    \|   | |    ' |   |   '    
+|    |_____/|     |    |    ||    |\    \ |     /___/|  |    \    \___|/       |   |        
+|    |      |\     \  /    /||    | |    ||     \____|\ |    |\     \         /   //        
+|____|      | \_____\/____/ ||____| |____||____ '     /||\ ___\|_____|       /___//         
+|    |       \ |    ||    | /|    | |    ||    /_____/ || |    |     |      |`   |          
+|____|        \|____||____|/ |____| |____||____|     | / \|____|_____|      |____|          
+  )/             \(    )/      \(     )/    \( |_____|/     \(    )/          \(            
+  '               '    '        '     '      '    )/         '    '            '            
+                                                  '                                         
+    """)
     scrolling_text("You arrive at the forest...")
     scrolling_text("You see a sign saying 'DANGER: DO NOT ENTER'...")
     scrolling_text("You decide to ignore the sign and venture deeper into the forest...")
@@ -337,10 +368,38 @@ def final_mountain():
         if answer == question["answer"]:
             scrolling_text("Correct! The sage nods in approval and grants you passage to the final destination.")
             scrolling_text("You have completed your journey and helped spread awareness about plastic pollution!")
+            print(r"""
+                                                                                               
+ _________________  ____   ____      ______              ______  _____   ______        _____   
+/                 \|    | |    | ___|\     \         ___|\     \|\    \ |\     \   ___|\    \  
+\______     ______/|    | |    ||     \     \       |     \     \\\    \| \     \ |    |\    \ 
+   \( /    /  )/   |    |_|    ||     ,_____/|      |     ,_____/|\|    \  \     ||    | |    |
+    ' |   |   '    |    .-.    ||     \--'\_|/      |     \--'\_|/ |     \  |    ||    | |    |
+      |   |        |    | |    ||     /___/|        |     /___/|   |      \ |    ||    | |    |
+     /   //        |    | |    ||     \____|\       |     \____|\  |    |\ \|    ||    | |    |
+    /___//         |____| |____||____ '     /|      |____ '     /| |____||\_____/||____|/____/|
+   |`   |          |    | |    ||    /_____/ |      |    /_____/ | |    |/ \|   |||    /    | |
+   |____|          |____| |____||____|     | /      |____|     | / |____|   |___|/|____|____|/ 
+     \(              \(     )/    \( |_____|/         \( |_____|/    \(       )/    \(    )/   
+      '               '     '      '    )/             '    )/        '       '      '    '    
+                                        '                   '                                  
+            """)
+            scrolling_text("Now, do you wish to restart this journey choosing different options?")
+            while True:
+                restart = input("Please answer with 'yes' or 'no': ").strip().lower()
+                if restart in ['yes', 'no']:
+                    if restart == "yes":
+                        beginning()
+                    else:
+                        exit()
+                else:
+                    print("Invalid response. Please answer with 'yes' or 'no'.")
         else:
             scrolling_text("Wrong answer! The sage shakes his head and you are striked by lightning...")
             gameover("failing the final quiz")
 
     path("Inspect Doors", "Middle Door", inspect_doors, middle_door)
 
+print("⚠ Make sure to run in a *seperate terminal* with fullscreen for full game visuals ⚠")
+time.sleep(3)
 beginning()
